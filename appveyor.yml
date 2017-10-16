@@ -1,0 +1,17 @@
+version: 1.0.{build}
+pull_requests:
+  do_not_increment_build_number: true
+branches:
+  only:
+  - dev
+image: Visual Studio 2017
+clone_folder: c:\azure-functions-nodejs-worker
+install:
+- ps: Install-Product node 8.4.0 x86
+cache: 'vendor'
+build_script:
+- ps: '& .\package.ps1'
+test_script:
+- go test
+artifacts:
+- path: 'vendor/**'
